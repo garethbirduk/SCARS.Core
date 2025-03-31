@@ -1,7 +1,86 @@
-**/*/obj/**/*
-**/*/bin/**/*
-.vs/
-coverage/
-TestResults/
+## Ignore build output
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
 
-**/*/coverage.opencover.xml
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider settings
+.idea/
+
+## Ignore Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code settings
+.vscode/
+
+# Build results
+*.dll
+*.exe
+*.app
+*.log
+
+# Coverage reports
+test-report/
+TestResults/
+*.coverage
+*.coveragexml
+*.lcov
+*.cobertura.xml
+
+# dotCover files
+*.dotCover
+
+# ReportGenerator cache
+*.report.xml
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+
+# ReSharper
+*.DotSettings.user
+_ReSharper*/
+*.[Rr]e[Ss]harper
+resharper.log
+
+# VS Test Results
+*.trx
+*.vspscc
+*.vspx
+*.vsp
+*.psess
+*.pidb
+*.svclog
+
+# Global tool restore
+**/.tools/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Backup & temp files
+*.bak
+*.tmp
+*.swp
+
+# Mac system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+desktop.ini
