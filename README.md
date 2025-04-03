@@ -1,44 +1,43 @@
-[<img src="https://raw.githubusercontent.com/garethbirduk/GradientSoftware.SCARS-Core/main/resources/icon.png" width="25" height="25">](https://github.com/garethbirduk/GradientSoftware.SCARS-Core)
-[![main](https://github.com/garethbirduk/GradientSoftware.SCARS-Core/actions/workflows/main.yml/badge.svg)](https://github.com/garethbirduk/GradientSoftware.SCARS-Core/actions)
-[![coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/garethbirduk/GIST_ID/raw/code-coverage.json)](https://garethbirduk.github.io/GradientSoftware.SCARS-Core)
+# SCARS.Core
 
-# Template for dotnet projects
+**SCARS.Core** is a foundational library for the SCARS framework that focuses on clean, testable, and logic-separated code. SCARS encourages real data usage for testing to avoid the performance overhead and inconsistencies introduced by mocks.
 
-- [ ] GH_APIKEY - Generate this in developer settings including package creation / deletion<br>
-- [ ] GIST_AUTH_TOKEN - Generate this in developer settings including gist creation
-- [ ] GISTID - Create a gist and get the GISTID in this step
-- [ ] SCARS-Core - Repo name (without GradientSoftware.) e.g. Utils
+The core components include:
+1. **Architecture Rules**: Enforce design patterns to maintain clean architecture.
+2. **Attributes**: Used to enforce separation of logic and glue, ensure services are used correctly, and prevent mocks.
+3. **Storage**: A key component that provides mock data to be used with real services, making it easier to test services with data that behaves consistently.
 
-## Generate coverage gist
-https://gist.github.com/
-- [ ] Set Gist description - eg code-coverage-utils.json
-- [ ] Set Gist filename - eg code-coverage-utils.json
-- [ ] Set Gist content - eg code-coverage-utils.json
-- [ ] Note the GISTID
+## Key Features
 
-# Folder level Search and Replace in files
-- [ ] SCARS-Core
-- [ ] GISTID - note GISTID is the mask; GIST_ID is the reference to the environment variable which must remain as GIST_ID not the value!
+### Architecture Rules
+SCARS enforces architectural rules through Roslyn analyzers and custom attributes. These rules ensure that services are designed with separation of concerns in mind:
+- **[Glue]**: Services that wire other services together without adding business logic.
+- **[Logic]**: Services that contain the actual business logic and should have minimal dependencies.
+- **[Unmockable]**: A marker attribute to prevent mocking of certain services in tests. Forces the use of real services or mock data.
 
-# Rename files and folders
-- [] /SCARS-Core
-- [] /SCARS-Core/SCARS-Core.csproj
-- [] /SCARS-Core.Test
-- [] /SCARS-Core.Test/SCARS-Core.Test.csproj
-- [] /SCARS-Core.sln
-      
-# Set environment variables
-https://github.com/garethbirduk/GradientSoftware.SCARS-Core/settings/secrets/actions
-- [ ] GH_APIKEY
-- [ ] GIST_AUTH_TOKEN
-- [ ] GIST_ID
+### Attributes
+SCARS uses attributes to:
+- Mark classes and methods with specific roles like `Glue` and `Logic`.
+- Enforce rules about which services can be mocked and which can't.
+- Keep the service architecture clean, reducing technical debt over time.
 
-# Set rules
-https://github.com/garethbirduk/GradientSoftware.SCARS-Core/settings/rules
-- [ ] Main protection
+### Storage
+The **Storage** component provides an abstraction for storing and retrieving data. It includes:
+- **IDataStorage<T>**: A simple interface for storing and retrieving data.
+- **MemoryStorage<T>** and **FileStorage<T>**: Implementations that store data either in memory or in files.
+  
+Storage is key to SCARS because it allows the use of mock data passed to real services, enabling testing without the need for mock services. This mimics real-world data interactions and prevents over-reliance on mocks.
 
-# Github pages
-https://github.com/garethbirduk/GradientSoftware.SCARS-Core/settings/pages
-- [ ] Build and deployment source: Github Actions
-- [ ] Configure static page then Cancel. Not sure this is required.
+### Benefits of SCARS
+- **Prevent Mocks**: SCARS makes it harder to mock services, encouraging the use of real services or mock data that behave like real data.
+- **Cleaner Code**: Through analyzers and attributes, SCARS ensures that your code maintains separation of concerns and enforces good architectural practices.
+- **Easier Testing**: By using Storage to provide mock data to real services, testing becomes more reliable and representative of production data.
 
+## Getting Started
+
+### Install SCARS.Core
+
+Add SCARS.Core to your project via NuGet:
+
+```bash
+dotnet add package SCARS.Core

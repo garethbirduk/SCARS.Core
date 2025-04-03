@@ -2,22 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>SCARS_Core</RootNamespace>
+    <RootNamespace>SCARS.Core</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>GradientSoftware.$(AssemblyName)</Title>
+    <Title>$(AssemblyName)</Title>
     <Description>A SCARS Core library for SCARS framwork dotnet 9 and above.</Description>
     <Copyright>© 2025 Gareth Bird</Copyright>
     <ErrorReport>none</ErrorReport>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <RepositoryType></RepositoryType>
-    <PackageTags>utils; gradient; software; google</PackageTags>
-    <PackageId>GradientSoftware.$(AssemblyName)</PackageId>
-    <RepositoryUrl>https://github.com/garethbirduk/SCARS-Core</RepositoryUrl>
-    <Title>SCARS.$(AssemblyName)</Title>
+    <PackageTags>scars; utils; software; google</PackageTags>
+    <PackageId>$(AssemblyName)</PackageId>
+    <RepositoryUrl>https://github.com/garethbirduk/SCARS.Core</RepositoryUrl>
+    <Title>$(AssemblyName)</Title>
     <Version>0.1.0</Version>
-    <PackageProjectUrl>https://github.com/garethbirduk/SCARS-Core</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/garethbirduk/SCARS.Core</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
