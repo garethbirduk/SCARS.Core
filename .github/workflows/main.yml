@@ -20,7 +20,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/upload-artifact@latest
+    
+    - name: Clear Cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ github.sha }}
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
