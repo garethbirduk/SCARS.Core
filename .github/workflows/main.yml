@@ -20,8 +20,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/upload-artifact@latest
-    
+    - uses: actions/checkout@v4  # Correct checkout version
+
+    # Add a step to clear the cache (before installing dependencies)
     - name: Clear Cache
       uses: actions/cache@v2
       with:
@@ -52,9 +53,7 @@ jobs:
         reportgenerator "-reports:SCARS.Core.Test/coverage.opencover.xml" "-targetdir:./coverage/" "-reporttypes:Badges;Html;TextSummary"
 
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v1
-      with:
-          path: './coverage/'
+      uses: actions/upload-artifact@latest  # Correct action version
 
     - name: Deploy to GitHub Pages
       id: deployment
@@ -126,4 +125,4 @@ jobs:
       run: dotnet nuget add source --username ${{ github.actor }} --password ${{ github.token }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/garethbirduk/index.json"
 
     - name: NuGet deploy Package
-      run: dotnet nuget push ./nupkgs/*.nupkg --source "github" --api-key ${{ secrets.GH_APIKEY }} --skip-duplicate    
+      run: dotnet nuget push ./nupkgs/*.nupkg --source "github" --api-key ${{ secrets.GH_APIKEY }} --skip-duplicate
