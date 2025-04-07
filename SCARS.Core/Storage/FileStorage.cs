@@ -10,24 +10,38 @@ public class FileStorage<T> : IDataStorage<T>, IDataPersistence<T>
     private readonly IDataStorage<T> _inner;
     private readonly string _writePath;
 
+    private void CheckDirectoryWritePermissions(string directory)
+    {
+        var directoryAttributes = File.GetAttributes(directory);
+
+        if (directoryAttributes.HasFlag(FileAttributes.ReadOnly))
+        {
+            throw new UnauthorizedAccessException($"Write access to the path '{directory}' is denied.");
+        }
+    }
+
+    private void EnsureDirectoryExistsAndWritable(string filePath)
+    {
+        var directory = Path.GetDirectoryName(filePath);
+
+        // Return early if directory is null or empty
+        if (string.IsNullOrWhiteSpace(directory))
+            return;
+
+        // Ensure directory exists or create it
+        if (!Directory.Exists(directory))
+            Directory.CreateDirectory(directory);
+
+        // Check if the directory is read-only
+        CheckDirectoryWritePermissions(directory);
+    }
+
     public FileStorage([NotNull] IDataStorage<T> inner, [NotNull] string writeFilePath)
     {
         _inner = inner;
         _writePath = writeFilePath;
 
-        // Ensure that the directory exists before trying to write to the file.
-        var directory = Path.GetDirectoryName(_writePath);
-        if (!string.IsNullOrWhiteSpace(directory))
-        {
-            if (!Directory.Exists(directory))
-                Directory.CreateDirectory(directory);
-
-            var directoryAttributes = File.GetAttributes(directory);
-            if (directoryAttributes.HasFlag(FileAttributes.ReadOnly))
-            {
-                throw new UnauthorizedAccessException($"Write access to the path '{directory}' is denied.");
-            }
-        }
+        EnsureDirectoryExistsAndWritable(_writePath);
     }
 
     public Task ClearDataAsync() => _inner.ClearDataAsync();
